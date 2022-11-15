@@ -3,6 +3,10 @@ const app = express();
 
 const PORT = process.env.PORT || 4001;
 
+// Add middleware for handling CORS requests from index.html
+const cors = require('cors');
+app.use(cors());
+
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
@@ -63,6 +67,7 @@ app.delete('/minions/:minionId', (req,res,next)=>{
     }
     res.send();
 });
+
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`CORS-enabled Server listening on port ${PORT}`);
 });

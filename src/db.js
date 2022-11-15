@@ -94,6 +94,8 @@ const isValidMinion = (instance) => {
       instance.id = `${model.nextId++}`;
       model.data.push(instance);
       return model.data[model.data.length - 1];
+    }else{
+      return null;
     }
   }
 
