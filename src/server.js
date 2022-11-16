@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 4001;
 const cors = require('cors');
 app.use(cors());
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
@@ -19,8 +22,9 @@ const {
     deleteFromDatabasebyId,
     deleteAllFromDatabase,
   } = require('./db');
-  
+ 
 app.param('minionId', (req, res, next, id)=>{
+    console.log("parse parameter");
     const minion = getFromDatabaseById('minions', id);
     if(minion){
         req.minion = minion;
@@ -31,25 +35,32 @@ app.param('minionId', (req, res, next, id)=>{
 });
 
 app.get('/minions', (req, res, next) =>{
+    console.log("get all minions");
     res.send(getAllFromDatabase('minions'));
 });
 
 app.put('/minions/:minionId', (req, res, next)=>{
+    console.log("update mininion id: " + req.minion.id);
     let updatedMinionInstance = updateInstanceInDatabase('minions', req.body);
-    if(updatedMinionInstance){
+    if(updatedMinionInstance){//is an instance
+        console.log('updatedMinionInstanc: ' + updatedMinionInstance);
         res.status(200).send(updatedMinionInstance);
-    }else{
+    }else{//null
         res.status(400).send();
     }
 });
 
 app.post('/minions', (req,res,next)=>{
-    let addedMinionInstance = addToDatabase('minions', req.body);
-    if(addedMinionInstance){
+    try{
+        console.log("post a new minion");
+        let addedMinionInstance = addToDatabase('minions', req.body);
+        //console.log(addedMinionInstance);
         res.status(201).send(addedMinionInstance);
-    }else{
-        res.status(400);
+    }catch(err){
+        console.log(err);
+        res.status(400).send();
     }
+    
     
 })
 

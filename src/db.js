@@ -35,7 +35,7 @@ const isValidMinion = (instance) => {
     if (!isNaN(parseFloat(instance.salary)) && isFinite(instance.salary)) {
       instance.salary = Number(instance.salary);
     } else {
-      throw new Error('Minion\'s salary must be a number.');
+      //throw new Error('Minion\'s salary must be a number.');
     }
     return true;
   }
@@ -81,7 +81,7 @@ const isValidMinion = (instance) => {
       return null;
     }
     return model.data.find((element) => {
-      return element.id === id;
+      return element.id == id;
     });
   }
   
@@ -105,9 +105,10 @@ const isValidMinion = (instance) => {
       return null;
     }
     const instanceIndex = model.data.findIndex((element) => {
-      return element.id === instance.id;
+      return element.id == instance.id;
     });
     if (instanceIndex > -1 && model.isValid(instance)) {
+      console.log("find minion id:"+ instance.id);
       model.data[instanceIndex] = instance;
       return model.data[instanceIndex];
     } else {

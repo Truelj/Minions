@@ -1,6 +1,6 @@
 
 //import actions
-import {setMinions, creatMinionThunk} from './minions.js';
+import {setMinions, addMinion, updateMinion, creatMinionThunk} from './minions.js';
 import store from './index.js';
 
 //test code
@@ -8,7 +8,8 @@ import store from './index.js';
 // Log the initial state
 console.log('Initial state: ', store.getState())
 
-// load data from the server
+// test actions
+// 1.test 'setMinions()'
 async function loadData(){
     try{
         const response = await fetch('http://localhost:4001/minions');
@@ -18,7 +19,7 @@ async function loadData(){
         console.log(err);
     }
 }
-// Now, dispatch some actions
+
 
 loadData().then((response) => {
     if(response){
@@ -26,6 +27,78 @@ loadData().then((response) => {
         console.log('state:' + store.getState());
     }
 });
+
+// 2.test 'addMinion()'
+const newMinion = {
+    name: 'Evan Cassin',
+    title: 'Product manager',
+    weaknesses: 'none',
+    salary: 40000
+}
+let postOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newMinion)
+}
+async function postMinion(){
+    try{
+        const response = await fetch('http://localhost:4001/minions', postOptions);
+        if(response.ok){
+            const minionInstance = await response.json();
+            return minionInstance;
+        }else{
+            console.log('request to create minion failed');
+        }
+    }catch(err){//catch any error thrown from await
+        console.log(err);
+    }
+}
+
+postMinion().then((minionInstance)=>{
+    store.dispatch(addMinion(minionInstance));
+    console.log('state:' + store.getState());
+})
+
+//3.test 'updateMinion()'
+const updatedMinion = {
+    id: 11,
+    name: 'Evan Cassin',
+    title: 'Product manager',
+    weaknesses: 'too aggressive(updated)',
+    salary: 40000
+};
+let putOptions = {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(updatedMinion)
+};
+
+async function updateAMinion(){
+    try{
+        const response = await fetch('http://localhost:4001/minions/11', putOptions);
+        if(response.ok){
+            const minionInstance = await response.json();
+            return minionInstance;
+        }else{
+            console.log('request to update minion failed');
+        }
+    }catch(err){//catch any error thrown from await
+        console.log(err);
+    }
+}
+
+updateAMinion()
+    .then((updatedMinionInstance)=>{
+        store.dispatch(updateMinion(updatedMinionInstance));
+        console.log('state:' + store.getState());
+    });
+
+//test thunks
+//test createMinionThunk
+/*
+store.dispatch(creatMinionThunk(newMinion))
+    .then((thunkResponse)=>{console.log(thunkResponse)});
+*/
 
 const Test = ()=>{
     return (
