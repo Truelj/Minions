@@ -54,7 +54,7 @@ app.post('/minions', (req,res,next)=>{
     try{
         console.log("post a new minion");
         let addedMinionInstance = addToDatabase('minions', req.body);
-        //console.log(addedMinionInstance);
+        console.log(addedMinionInstance);
         res.status(201).send(addedMinionInstance);
     }catch(err){
         console.log(err);

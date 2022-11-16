@@ -1,6 +1,6 @@
 
 //import actions
-import {setMinions, addMinion, updateMinion, creatMinionThunk} from './minions.js';
+import {setMinions, addMinion, updateMinion, createMinionThunk, updateMinionThunk} from './minions.js';
 import store from './index.js';
 
 //test code
@@ -53,12 +53,12 @@ async function postMinion(){
         console.log(err);
     }
 }
-
+/*
 postMinion().then((minionInstance)=>{
     store.dispatch(addMinion(minionInstance));
     console.log('state:' + store.getState());
 })
-
+*/
 //3.test 'updateMinion()'
 const updatedMinion = {
     id: 11,
@@ -86,19 +86,30 @@ async function updateAMinion(){
         console.log(err);
     }
 }
-
+/*
 updateAMinion()
     .then((updatedMinionInstance)=>{
         store.dispatch(updateMinion(updatedMinionInstance));
         console.log('state:' + store.getState());
     });
-
-//test thunks
-//test createMinionThunk
-/*
-store.dispatch(creatMinionThunk(newMinion))
-    .then((thunkResponse)=>{console.log(thunkResponse)});
 */
+
+//test thunks....
+//1.test createMinionThunk()
+
+const anotherNewMinion = {
+    name: 'Josh Copper',
+    title: 'Data scientist',
+    weaknesses: 'too smart',
+    salary: 40000
+};
+const thunk = createMinionThunk(anotherNewMinion);
+store.dispatch(thunk)
+    .then((response)=>{console.log(response)});
+
+//2.test updateMinionThunk()
+store.dispatch(updateMinionThunk(updatedMinion))
+    .then((response)=>{console.log(response)});
 
 const Test = ()=>{
     return (

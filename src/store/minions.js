@@ -20,49 +20,47 @@ export const updateMinion = (minion) =>{
     }
 };
 //thunks
-export const creatMinionThunk = (minion) => dispatch =>{
-    return async function postMinionThunk(dispatch){
-        let postOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(minion)
+export const createMinionThunk = (minion) => async dispatch => {
+    let postOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(minion)
+    }
+    try{
+        const response = await fetch('http://localhost:4001/minions', postOptions);
+        if(response.ok){
+            const minionInstance = await response.json();
+            console.log('thunk: minion instance is'  + Object.values(minionInstance));
+            dispatch(addMinion(minionInstance));
+            return minionInstance;
+        }else{
+            console.log('request to create minion failed');
         }
-        try{
-            const response = await fetch('http://localhost:4001/minions', postOptions);
-            if(response.ok){
-                const minionInstance = await response.json();
-                return minionInstance;
-            }else{
-                console.log('request to create minion failed');
-            }
-        }catch(err){//catch any error thrown from await
-            console.log(err);
-        }
+    }catch(err){//catch any error thrown from await
+        console.log(err);
     }
 };
 
-export const updateMinionThunk = (minion) => dispatch => {
-    return async function updateAMinionThunk(){
-        let putOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(minion)
-        };
-        
-        try{
-            const response = await fetch(`http://localhost:4001/minions/${minion.id}`, putOptions);
-            if(response.ok){
-                const minionInstance = await response.json();
-                return minionInstance;
-            }else{
-                console.log('request to update minion failed');
-            }
-        }catch(err){//catch any error thrown from await
-            console.log(err);
+export const updateMinionThunk = (minion) => async dispatch => {
+    let putOptions = {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(minion)
+    };
+    try{
+        const response = await fetch(`http://localhost:4001/minions/${minion.id}`, putOptions);
+        if(response.ok){
+            const minionInstance = await response.json();
+            dispatch(updateMinion(minionInstance));
+            return minionInstance;
+        }else{
+            console.log('request to update minion failed');
         }
+    }catch(err){//catch any error thrown from await
+        console.log(err);
     }
 };
-export const deleteMinionThunk = (minion) => dispatch =>{
+export const deleteMinionThunk = (minion) => async dispatch =>{
     
 };
 export const minionsReducer = (state=initial, action) =>{
