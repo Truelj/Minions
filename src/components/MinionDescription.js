@@ -1,7 +1,10 @@
-export default function MinionDescription() {
+export default function MinionDescription({name, title, salary, weaknesses}) {
   return (
-    <div className="MinionDescription">
-      <p>description</p>
+    <div>
+      <p>Name: {name}</p>
+      <p>Title: {title}</p>
+      <p>Salary: {salary}</p>
+      <p>Weaknesses: {weaknesses}</p>
     </div>
   );
   }
