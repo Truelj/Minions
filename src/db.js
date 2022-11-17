@@ -108,7 +108,7 @@ const isValidMinion = (instance) => {
       return element.id == instance.id;
     });
     if (instanceIndex > -1 && model.isValid(instance)) {
-      console.log("find minion id:"+ instance.id);
+      //console.log("find minion id:"+ instance.id);
       model.data[instanceIndex] = instance;
       return model.data[instanceIndex];
     } else {

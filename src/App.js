@@ -1,10 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import AllMinions from './components/AllMinions.js';
+import Minion from './components/Minion.js';
 function App() {
   return (
-    <div className="App">
-      <heading> hello </heading>
+    <div >
+      <Router>
+        <Routes>
+          <Route path='/minions' element ={<AllMinions/>}></Route>
+          <Route path='/minions/:minionId' element={<Minion/>} ></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
