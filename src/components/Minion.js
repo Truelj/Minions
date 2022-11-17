@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { createMinionThunk } from "../store/minions";
-import { setSelectedMinion } from "../store/selectedMinion";
-
+import { Link, useParams } from "react-router-dom";
+import { createMinionThunk,updateMinionThunk } from "../store/minions";
+import MinionEdit from "./MinionEdit";
+import MinionDescription from './MinionDescription';
+import arrowImg from "../img/arrow.svg";
 //get a minion 
 const getAMinion = async (id)=>{
   try{
@@ -22,43 +23,79 @@ const getAMinion = async (id)=>{
 
 export default function Minion({newMinion}) {
   const {minionId} = useParams();
-  const selectedMinion = useSelector((state)=>({...state.selectedMinion}));
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const [selectedMinion, setSelectedMinion] = useState({});
+  
+  const [editing, setEditing] = useState(newMinion);
+  
   useEffect(()=>{
     if(newMinion){
       console.log('useEffect/create a minion');
       const newMinionInstance = {
-        name: 'Evan Cassin',
-        title: 'Product manager',
-        weaknesses: 'none',
-        salary: 40000
+        name: '',
+        title: '',
+        weaknesses: '',
+        salary: ''
       }
-      dispatch(createMinionThunk(newMinionInstance));
+      setSelectedMinion(newMinionInstance);
     }else{
       console.log('useEffect/load a minion with id: ' + minionId);
       getAMinion(minionId)
         .then((minion)=>{
           if(minion){
-            dispatch(setSelectedMinion(minion));
+            setSelectedMinion((prev)=>(minion));
           }else{
-            dispatch(setSelectedMinion(null));
+            setSelectedMinion((prev)=>(minion));
           }
         })
-        
 
     }
     
   },[ ]);
+  const handleChange = (e)=>{
+    setSelectedMinion((prev)=>{
+      return {...prev, [e.target.name]: e.target.value};
+    })
+  };
 
+  const toggleEdit = ()=>{
+    //hanle saving editing
+    if(editing){
+      if(newMinion){
+        dispatch(createMinionThunk(selectedMinion));
+      }else{
+        dispatch(updateMinionThunk(selectedMinion));
+      }
+    }
+    setEditing(!editing);
+  };
   return (
-    <div className="Minion">
-      <p>{selectedMinion? selectedMinion.id : "loading"} </p>
-      <p>{selectedMinion? selectedMinion.name : "loading"} </p>
-      <p>{selectedMinion? selectedMinion.title : "loading"} </p>
-      <p>{selectedMinion? selectedMinion.weaknesses : "loading"} </p>
-      <p>{selectedMinion? selectedMinion.salary : "loading"} </p>
-
+    <div id="single-minion-landing">
+      <div className="minion-details">
+            <div className="label meetings-label">
+              { 
+                newMinion
+                ? `New Minion`
+                : `Minion Id #${selectedMinion.id}`
+              }
+            </div>
+            <div className="minion-description">
+              { 
+                editing
+                ? <MinionEdit {...selectedMinion} handleChange={handleChange} />
+                : <MinionDescription {...selectedMinion}/>
+              }
+            </div>
+            <div className="button minion-save-button" onClick={toggleEdit} style={{color: 'blue'}}> 
+              { editing ? 'Save' : 'Edit' }
+            </div>
+      </div>
+      <div className="button back-button">
+          <Link to="/minions">
+            <img className="button" src={arrowImg} />
+          </Link>
+      </div>
     </div>
   );
 }
