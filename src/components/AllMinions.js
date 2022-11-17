@@ -5,6 +5,7 @@ import { deleteMinionThunk, setMinions } from "../store/minions";
 
 import minionImg from "../img/minion.png";
 import xButton from "../img/x_button.svg";
+import addButton from "../img/add_button.svg";
 async function loadData(){
   try{
       const response = await fetch('http://localhost:4001/minions');
@@ -28,21 +29,26 @@ export default function AllMinions() {
   const deleteMinion = (id) =>{
     dispatch(deleteMinionThunk(id));
   }
+
   return (
-    <div className="AllMinions">
-      <h1>all minions</h1>
+    <div id="all-minions">
       {minions.map((minion)=>{
         return (
-          <div>
-            <Link to={`/minions/${minion.id}`} key={minion.id}> 
+          <div className="minion-grid" key={minion.id}> 
+            <Link to={`/minions/${minion.id}`} > 
               <img className="button minion-thumbnail" src={minionImg}></img>
-              <p>{minion.name.match(/.{1,11}/g).join('\n')}</p>
+              
               <p>ID #{minion.id}</p>
             </Link>
             <img onClick={() => deleteMinion(minion.id)}  className="button x-button" src={xButton} alt="" />
           </div>
         )
       })}
+      <div id="add-minion-button-grid" className="minion-grid">
+            <Link to="/minions/new">
+              <img id="add-minion-button" className="button" src={addButton} alt="" />
+            </Link>
+      </div>
     </div>
   );
 }

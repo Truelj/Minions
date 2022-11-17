@@ -12,11 +12,11 @@ import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const myRender = ()=>{
   root.render(
-    <React.StrictMode>
+ 
       <Provider store={store}>
        <App ></App>
       </Provider>
-    </React.StrictMode>
+
   );
 }
 store.subscribe(myRender);

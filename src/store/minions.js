@@ -1,3 +1,5 @@
+import { setSelectedMinion } from "./selectedMinion";
+
 const initial = [];
 
 //action creators
@@ -32,6 +34,7 @@ export const createMinionThunk = (minion) => async dispatch => {
             const minionInstance = await response.json();
             //console.log('thunk: minion instance is'  + Object.values(minionInstance));
             dispatch(addMinion(minionInstance));
+            dispatch(setSelectedMinion(minionInstance));
             return minionInstance;
         }else{
             console.log('request to create minion failed');
