@@ -1,6 +1,6 @@
 
 //import actions
-import {setMinions, addMinion, updateMinion, createMinionThunk, updateMinionThunk} from './minions.js';
+import {setMinions, addMinion, updateMinion, createMinionThunk, updateMinionThunk, deleteMinionThunk} from './minions.js';
 import store from './index.js';
 
 //test code
@@ -24,7 +24,7 @@ async function loadData(){
 loadData().then((response) => {
     if(response){
         store.dispatch(setMinions(response));
-        console.log('state:' + store.getState());
+        console.log('state:' + store.getState().minions);
     }
 });
 
@@ -56,7 +56,7 @@ async function postMinion(){
 /*
 postMinion().then((minionInstance)=>{
     store.dispatch(addMinion(minionInstance));
-    console.log('state:' + store.getState());
+    console.log('state:' + store.getState().minions);
 })
 */
 //3.test 'updateMinion()'
@@ -90,7 +90,7 @@ async function updateAMinion(){
 updateAMinion()
     .then((updatedMinionInstance)=>{
         store.dispatch(updateMinion(updatedMinionInstance));
-        console.log('state:' + store.getState());
+        console.log('state:' + store.getState().minions);
     });
 */
 
@@ -103,13 +103,32 @@ const anotherNewMinion = {
     weaknesses: 'too smart',
     salary: 40000
 };
-const thunk = createMinionThunk(anotherNewMinion);
-store.dispatch(thunk)
-    .then((response)=>{console.log(response)});
 
+store.dispatch(createMinionThunk(anotherNewMinion))
+    //.then((response)=>{console.log(response)});
+
+const anotherUpdatedMinion = {
+    id: 11,
+    name: 'Josh Copper',
+    title: 'Data scientist',
+    weaknesses: 'super smart(updated)',
+    salary: 40000
+};
 //2.test updateMinionThunk()
-store.dispatch(updateMinionThunk(updatedMinion))
-    .then((response)=>{console.log(response)});
+store.dispatch(updateMinionThunk(anotherUpdatedMinion))
+    //.then((response)=>{console.log(response)});
+
+//3.test deleteMinionThunk()
+const MinionToDelete = {
+    id: 11,
+    name: 'Josh Copper',
+    title: 'Data scientist',
+    weaknesses: 'too smart',
+    salary: 40000
+};
+
+store.dispatch(deleteMinionThunk(MinionToDelete));
+
 
 const Test = ()=>{
     return (

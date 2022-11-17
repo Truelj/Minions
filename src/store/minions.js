@@ -30,7 +30,7 @@ export const createMinionThunk = (minion) => async dispatch => {
         const response = await fetch('http://localhost:4001/minions', postOptions);
         if(response.ok){
             const minionInstance = await response.json();
-            console.log('thunk: minion instance is'  + Object.values(minionInstance));
+            //console.log('thunk: minion instance is'  + Object.values(minionInstance));
             dispatch(addMinion(minionInstance));
             return minionInstance;
         }else{
@@ -61,7 +61,22 @@ export const updateMinionThunk = (minion) => async dispatch => {
     }
 };
 export const deleteMinionThunk = (minion) => async dispatch =>{
-    
+    let deleteOptions = {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(minion)
+    }
+    try{
+        const response = await fetch(`http://localhost:4001/minions/${minion.id}`, deleteOptions);
+        if(response.ok){
+            //fetch minions
+            console.log('deleteMinionThunk: delete succeed')
+        }else{
+            console.log('request to delete minion failed');
+        }
+    }catch(err){//catch any error thrown from await
+        console.log(err);
+    }
 };
 export const minionsReducer = (state=initial, action) =>{
     switch(action.type){

@@ -122,7 +122,7 @@ const isValidMinion = (instance) => {
       return null;
     }
     let index = model.data.findIndex((element) => {
-      return element.id === id;
+      return element.id == id;
     });
     if (index !== -1) {
       model.data.splice(index, 1);

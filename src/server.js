@@ -25,8 +25,11 @@ const {
  
 app.param('minionId', (req, res, next, id)=>{
     console.log("parse parameter");
+    console.log("typeof id:" + typeof id);
+    console.log("id: " + id);
     const minion = getFromDatabaseById('minions', id);
     if(minion){
+        console.log('minion: '+ minion);
         req.minion = minion;
         next();
     }else{
@@ -70,6 +73,7 @@ app.delete('/minions', (req,res,next)=>{
 });
 
 app.delete('/minions/:minionId', (req,res,next)=>{
+    console.log("delete a minion");
     const deleted = deleteFromDatabasebyId('minions', req.params.minionId);
     if (deleted) {
       res.status(204);

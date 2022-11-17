@@ -1,12 +1,12 @@
 //this is a test file to test server api
 import fetch from 'node-fetch';
-/*
+
 //create minions
 let minions;
 fetch('http://localhost:4001/minions')
     .then((response)=>(response.json()))
-    .then((response)=>{minions = response; console.log(minions)});
-*/
+    .then((response)=>{minions = response; console.log(`test 1: create minions: ${minions}`)});
+
 
 //add a minion 
 const newMinion = {
@@ -22,7 +22,7 @@ let postOptions = {
 }
 fetch('http://localhost:4001/minions', postOptions)
     .then((response)=>(response.json()))
-    .then((response)=>{console.log(response)});
+    .then((response)=>{console.log(`test 2: add a minon ${response}`)});
 
 //update a minion
 const updatedMinion = {
@@ -54,5 +54,9 @@ async function updateAMinion(){
 
 updateAMinion()
     .then((response)=>{
-        console.log(response);
+        console.log(`test 3: update the newly added minion: ${response}`);
     });
+
+//delete a minion
+
+//delete all minions
