@@ -60,14 +60,13 @@ export const updateMinionThunk = (minion) => async dispatch => {
         console.log(err);
     }
 };
-export const deleteMinionThunk = (minion) => async dispatch =>{
+export const deleteMinionThunk = (id) => async dispatch =>{
     let deleteOptions = {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(minion)
+        headers: {'Content-Type': 'application/json'}
     }
     try{
-        const response = await fetch(`http://localhost:4001/minions/${minion.id}`, deleteOptions);
+        const response = await fetch(`http://localhost:4001/minions/${id}`, deleteOptions);
         if(response.ok){
             console.log('deleteMinionThunk: delete succeed')
             //fetch minions

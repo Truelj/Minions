@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
-import { setMinions } from "../store/minions";
+import { deleteMinionThunk, setMinions } from "../store/minions";
 
-
+import minionImg from "../img/minion.png";
+import xButton from "../img/x_button.svg";
 async function loadData(){
   try{
       const response = await fetch('http://localhost:4001/minions');
@@ -24,12 +25,23 @@ export default function AllMinions() {
     loadData().then((minions)=>{dispatch(setMinions(minions))});
   }, []);
 
-
+  const deleteMinion = (id) =>{
+    dispatch(deleteMinionThunk(id));
+  }
   return (
     <div className="AllMinions">
       <h1>all minions</h1>
       {minions.map((minion)=>{
-        return <Link to={`/minions/${minion.id}`} key={minion.id}> {minion.name}</Link>
+        return (
+          <div>
+            <Link to={`/minions/${minion.id}`} key={minion.id}> 
+              <img className="button minion-thumbnail" src={minionImg}></img>
+              <p>{minion.name.match(/.{1,11}/g).join('\n')}</p>
+              <p>ID #{minion.id}</p>
+            </Link>
+            <img onClick={() => deleteMinion(minion.id)}  className="button x-button" src={xButton} alt="" />
+          </div>
+        )
       })}
     </div>
   );
