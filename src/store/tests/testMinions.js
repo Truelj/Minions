@@ -1,7 +1,7 @@
 
 //import actions
-import {setMinions, addMinion, updateMinion, createMinionThunk, updateMinionThunk, deleteMinionThunk} from './minions.js';
-import store from './index.js';
+import {setMinions, addMinion, updateMinion, createMinionThunk, updateMinionThunk, deleteMinionThunk} from '../minions.js';
+import store from '../index.js';
 
 //test code
 
@@ -130,10 +130,10 @@ const MinionToDelete = {
 store.dispatch(deleteMinionThunk(MinionToDelete));
 
 
-const Test = ()=>{
+const TestMinions = ()=>{
     return (
         <div></div>
     )
 };
 
-export default Test;
+export default TestMinions;

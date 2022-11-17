@@ -42,6 +42,11 @@ app.get('/minions', (req, res, next) =>{
     res.send(getAllFromDatabase('minions'));
 });
 
+app.get('/minions/:minionId', (req, res, next)=>{
+    console.log("get a minion with id : " + req.minion.id);
+    res.status(200).send(req.minion);
+});
+
 app.put('/minions/:minionId', (req, res, next)=>{
     console.log("update mininion id: " + req.minion.id);
     let updatedMinionInstance = updateInstanceInDatabase('minions', req.body);

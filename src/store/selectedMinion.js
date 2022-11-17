@@ -7,7 +7,7 @@ const initial = {
 };
 
 //action creators
-const setSelectedMinion = (minion)=>{
+export const setSelectedMinion = (minion)=>{
     return {
         type: 'setSelectedMinion',
         payload: minion
@@ -16,7 +16,7 @@ const setSelectedMinion = (minion)=>{
 const selectedMinionReducer = (state=initial, action) =>{
     switch(action.type){
         case 'setSelectedMinion':
-            break;
+            return action.payload;
         default:
             return state;
     }

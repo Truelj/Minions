@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.js';
-import Test from './store/test.js';
+
 import reportWebVitals from './reportWebVitals.js';
 
 import { Route, BrowserRouter as Router} from 'react-router-dom';
 
 import AllMinions from './components/AllMinions.js';
 import Minion from './components/Minion.js';
+//import TestMinions from './store/tests/testMinions';
+import TestSelectedMinion from './store/tests/testSelectedMinions';
 
 const appEnter = () =>{
   //store.dispatch(setMinions)
@@ -26,7 +28,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App></App>
-    <Test></Test>
+    <TestSelectedMinion></TestSelectedMinion>
   </React.StrictMode>
 );
 

@@ -69,8 +69,15 @@ export const deleteMinionThunk = (minion) => async dispatch =>{
     try{
         const response = await fetch(`http://localhost:4001/minions/${minion.id}`, deleteOptions);
         if(response.ok){
-            //fetch minions
             console.log('deleteMinionThunk: delete succeed')
+            //fetch minions
+            const response = await fetch('http://localhost:4001/minions');
+            if(response.ok){
+                const minions = await response.json();
+                dispatch(setMinions(minions));
+            }else{
+                console.log('request to get minions failed');
+            }
         }else{
             console.log('request to delete minion failed');
         }
