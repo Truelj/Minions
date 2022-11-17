@@ -14,6 +14,7 @@ export const setSelectedMinion = (minion)=>{
     }
 };
 const selectedMinionReducer = (state=initial, action) =>{
+    console.log('selectedMinionReducer receives an action: ' + action.type);
     switch(action.type){
         case 'setSelectedMinion':
             return action.payload;

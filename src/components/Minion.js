@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { setSelectedMinion } from "../store/selectedMinion";
 
 //get a minion 
 const getAMinion = async (id)=>{
@@ -18,17 +20,22 @@ const getAMinion = async (id)=>{
 
 export default function Minion() {
   const {minionId} = useParams();
-  const [selectedMinion, setSelectedMinion] = useState(null);
+  const selectedMinion = useSelector((state)=>({...state.selectedMinion}));
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     console.log('useEffect/load a minion with id: ' + minionId);
     getAMinion(minionId)
-      .then((minion)=>{setSelectedMinion(minion)});
+      .then((minion)=>{dispatch(setSelectedMinion(minion))});
   },[]);
 
   return (
     <div className="Minion">
       <p>{selectedMinion? selectedMinion.id : "loading"} </p>
+      <p>{selectedMinion? selectedMinion.name : "loading"} </p>
+      <p>{selectedMinion? selectedMinion.title : "loading"} </p>
+      <p>{selectedMinion? selectedMinion.weaknesses : "loading"} </p>
+      <p>{selectedMinion? selectedMinion.salary : "loading"} </p>
 
     </div>
   );

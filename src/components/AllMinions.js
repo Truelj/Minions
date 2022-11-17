@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import {useDispatch, useSelector} from 'react-redux';
+import { setMinions } from "../store/minions";
 
 
 async function loadData(){
@@ -14,19 +15,20 @@ async function loadData(){
 }
 
 export default function AllMinions() {
-  const [allMinions, setAllMinions] = useState([]);
+  const minions = useSelector((state)=>([...state.minions]));
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     //to load all minions
     console.log('useEffect/load all minions...');
-    loadData().then((minions)=>{setAllMinions((prev)=>(minions))});
+    loadData().then((minions)=>{dispatch(setMinions(minions))});
   }, []);
 
 
   return (
     <div className="AllMinions">
       <h1>all minions</h1>
-      {allMinions.map((minion)=>{
+      {minions.map((minion)=>{
         return <Link to={`/minions/${minion.id}`} key={minion.id}> {minion.name}</Link>
       })}
     </div>

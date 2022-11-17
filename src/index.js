@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.js';
 import store from './store/index.js';
 import reportWebVitals from './reportWebVitals.js';
+import { Provider } from 'react-redux';
 
 //import TestMinions from './store/tests/testMinions';
 //import TestSelectedMinion from './store/tests/testSelectedMinions';
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const myRender = ()=>{
   root.render(
     <React.StrictMode>
-      <App></App>
+      <Provider store={store}>
+       <App ></App>
+      </Provider>
     </React.StrictMode>
   );
 }

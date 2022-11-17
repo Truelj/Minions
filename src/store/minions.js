@@ -86,6 +86,7 @@ export const deleteMinionThunk = (minion) => async dispatch =>{
     }
 };
 export const minionsReducer = (state=initial, action) =>{
+    console.log('minionsReducer receives an action: ' + action.type);
     switch(action.type){
         case 'setMinions':
             return action.payload;
