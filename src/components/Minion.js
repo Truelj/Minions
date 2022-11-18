@@ -28,7 +28,7 @@ export default function Minion({newMinion}) {
   const [selectedMinion, setSelectedMinion] = useState({});
   
   const [editing, setEditing] = useState(newMinion);
-  
+
   useEffect(()=>{
     if(newMinion){
       console.log('useEffect/create a minion');

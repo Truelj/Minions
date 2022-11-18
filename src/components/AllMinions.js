@@ -31,15 +31,19 @@ export default function AllMinions() {
   }
 
   return (
-    <div id="all-minions">
+    <div id="minions-landing">
+      <div id="minions-title" className="label minions-label">MINIONS.exe</div>
+      <div id="all-minions">
       {minions.map((minion)=>{
         return (
           <div className="minion-grid" key={minion.id}> 
-            <Link to={`/minions/${minion.id}`} > 
-              <img className="button minion-thumbnail" src={minionImg}></img>
-              
-              <p>ID #{minion.id}</p>
-            </Link>
+         
+              <Link to={`/minions/${minion.id}`} > 
+                <img className="button minion-thumbnail" src={minionImg}></img>
+                <p>{minion.name/*.match(/.{1,11}/g).join('\n')*/} </p>
+                <p>ID #{minion.id}</p>
+              </Link>
+           
             <img onClick={() => deleteMinion(minion.id)}  className="button x-button" src={xButton} alt="" />
           </div>
         )
@@ -50,6 +54,8 @@ export default function AllMinions() {
             </Link>
       </div>
     </div>
+  </div>
+
   );
 }
 

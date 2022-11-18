@@ -1,0 +1,74 @@
+.button {
+  cursor: pointer;
+}
+#minions-landing{
+  min-height: 394px;
+  width: 287px;
+}
+.label {
+  text-align: center;
+  text-decoration: none;
+}
+.minions-label{
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  margin: 9px 0px; 
+}
+#all-minions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.minion-grid {
+  background: wheat;
+  font-family: "Gill Sans", sans-serif;
+  width: 61px;
+  min-height: 107.16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  margin: 5px 5px;
+}
+
+.minion-grid a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* flex-flow: wrap; */
+  padding: 5px;
+  justify-content: space-between;
+  text-decoration: none;
+  text-align: center;
+}
+.minion-grid:hover {
+  text-decoration: underline;
+}
+
+.minion-thumbnail {
+  width: 50px;
+  margin: 5px 0px;
+}
+
+.minion-grid p {
+  cursor: pointer;
+}
+
+.x-button {
+  transform: rotate(45deg);
+  width: 12px;
+  align-self: center;
+}
+
+#add-minion-button-grid {
+  align-self: start;
+  
+}
+
+#add-minion-button {
+  width: 25px;
+}
+
