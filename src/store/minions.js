@@ -1,5 +1,3 @@
-import { setSelectedMinion } from "./selectedMinion";
-
 const initial = [];
 
 //action creators
@@ -34,7 +32,7 @@ export const createMinionThunk = (minion) => async dispatch => {
             const minionInstance = await response.json();
             //console.log('thunk: minion instance is'  + Object.values(minionInstance));
             dispatch(addMinion(minionInstance));
-            dispatch(setSelectedMinion(minionInstance));
+    
             return minionInstance;
         }else{
             console.log('request to create minion failed');
@@ -95,7 +93,7 @@ export const minionsReducer = (state=initial, action) =>{
         case 'addMinion':
             return [...state, action.payload];
         case 'updateMinion':
-            const index = state.findIndex((minion)=>{return minion.id=action.payload.id});
+            const index = state.findIndex((minion)=>{return minion.id===action.payload.id});
             return [...state.slice(0,index), action.payload, ...state.slice(index+1)];
         default:
             return state;

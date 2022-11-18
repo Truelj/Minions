@@ -17,13 +17,14 @@ async function loadData(){
 }
 
 export default function AllMinions() {
-  const minions = useSelector((state)=>([...state.minions]));
+  const allMinions = useSelector((state)=>(state.minions));
   const dispatch = useDispatch();
 
   useEffect(()=>{
     //to load all minions
     console.log('useEffect/load all minions...');
-    loadData().then((minions)=>{dispatch(setMinions(minions))});
+    loadData().then((minions)=>(dispatch(setMinions(minions))));
+
   }, []);
 
   const deleteMinion = (id) =>{
@@ -34,7 +35,7 @@ export default function AllMinions() {
     <div id="minions-landing">
       <div id="minions-title" className="label minions-label">MINIONS.exe</div>
       <div id="all-minions">
-      {minions.map((minion)=>{
+      {allMinions.map((minion)=>{
         return (
           <div className="minion-grid" key={minion.id}> 
          

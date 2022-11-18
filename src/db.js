@@ -21,7 +21,7 @@ const createMinion = () => {
   }
 }
 
-const allMinions = new Array(10).fill(0).map(createMinion);
+const allMinions = new Array(15).fill(0).map(createMinion);
 //console.log(allMinions);
 
 const isValidMinion = (instance) => {

@@ -1,49 +1,99 @@
+body {
+  background-color: #333333;
+  font-family: 'Source Code Pro', monospace;
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .button {
   cursor: pointer;
 }
-#minions-landing{
-  min-height: 394px;
-  width: 287px;
+
+#content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.App-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+#title {
+  font-family: 'Russo One', sans-serif;
+  font-size: 25.2px;
+  letter-spacing: 1.3px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 27px;
+  margin-bottom: 34px;
+}
+
+
 .label {
   text-align: center;
-  text-decoration: none;
+  color: #ff4f58;
+  /*text-decoration: underline;*/
 }
-.minions-label{
+
+.launch-label:active, .launch-button:active .launch-label {
+  color: #fff;
+}
+
+/* Minions */
+
+#minions-landing {
+  border: solid 1.5px #ff4f58;
+  min-height: 394px;
+  width: 287px;
+  margin: 15px;
+}
+
+#back-button {
+  position: absolute;
+  top: 6px;
+  left: 4px;
+}
+
+#back-button img {
+  width: 25.2px;
+}
+
+.minions-label {
   font-size: 12px;
   letter-spacing: 0.8px;
-  margin: 9px 0px; 
+  margin: 9px 0px;
 }
+
 #all-minions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
 }
 
 .minion-grid {
-  background: wheat;
-  font-family: "Gill Sans", sans-serif;
   width: 61px;
   min-height: 107.16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 9px;
   letter-spacing: 0.7px;
   margin: 5px 5px;
-}
-
-.minion-grid a{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* flex-flow: wrap; */
-  padding: 5px;
-  justify-content: space-between;
-  text-decoration: none;
   text-align: center;
 }
+
 .minion-grid:hover {
   text-decoration: underline;
 }
@@ -60,15 +110,136 @@
 .x-button {
   transform: rotate(45deg);
   width: 12px;
-  align-self: center;
 }
 
 #add-minion-button-grid {
-  align-self: start;
-  
+  justify-content: center;
 }
 
 #add-minion-button {
   width: 25px;
 }
 
+
+
+
+#single-minion-landing {
+  width: 287px;
+  height: 394px;
+  border: solid 2px #ff4f58;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.minion-description {
+  width: 259px;
+	height: 250px;
+	background-color: #565555;
+	border: solid 1.4px #fffefe;
+}
+
+.minion-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*border: solid 0.25px #ff4f58;*/
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+
+#minion-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52.5px;
+	height: 19.6px;
+  background-color: #ff4f58;
+	font-size: 12.6px;
+	font-weight: bold;
+	letter-spacing: 0.9px;
+  text-align: center;
+  margin: 10px;
+  text-transform: uppercase;
+}
+
+.minion-description {
+  padding: 5px;
+  font-size: 11.2px;
+	font-weight: 500;
+	line-height: 1.31;
+	letter-spacing: 0.9px;
+  text-align: left;
+  overflow-y: scroll;
+}
+
+.minion-description p {
+  padding-top: 5px;
+}
+
+.minion-edit-row {
+  padding: 5px 0px;
+}
+
+.minion-edit-label {
+  display: inline-block;
+  width: 65px;
+}
+
+.minion-edit input {
+  font-family: 'Source Code Pro', monospace;
+  background-color: #565555;
+  border: solid 1.4px #fffefe;
+  color: #fff;
+}
+
+.minion-input-textarea {
+  width: 98%;
+  min-height: 50px;
+  margin: 4px auto;
+  background-color: #565555;
+  border: solid 1.4px #fffefe;
+  font-family: 'Source Code Pro', monospace;
+  color: #fff;
+}
+
+.minion-save-button {
+  margin: 10px 0;
+  width: 52.5px;
+  height: 19.6px;
+  background-color: #ff4f58;
+  font-size: 12.6px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.minion-save-button:hover {
+  border: solid 1.5px #fff;
+}
+
+.minion-save-button:active {
+  text-decoration: underline;
+}
+
+
+
+.back-button {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.back-button img{
+  width: 20px;
+}
+input, textarea {
+  cursor: text;
+}

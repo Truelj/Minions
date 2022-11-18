@@ -27,7 +27,7 @@ export default function Minion({newMinion}) {
   const dispatch = useDispatch();
   const [selectedMinion, setSelectedMinion] = useState({});
   
-  const [editing, setEditing] = useState(newMinion);
+  const [editing, setEditing] = useState(newMinion?true:false);
 
   useEffect(()=>{
     if(newMinion){
@@ -42,16 +42,10 @@ export default function Minion({newMinion}) {
     }else{
       console.log('useEffect/load a minion with id: ' + minionId);
       getAMinion(minionId)
-        .then((minion)=>{
-          if(minion){
-            setSelectedMinion((prev)=>(minion));
-          }else{
-            setSelectedMinion((prev)=>(minion));
-          }
-        })
-
-    }
-    
+        .then((minion)=>{ setSelectedMinion((prev)=>(minion))
+        });
+      }
+      return ()=>{setSelectedMinion(()=>({}))}
   },[ ]);
   const handleChange = (e)=>{
     setSelectedMinion((prev)=>{
@@ -59,17 +53,19 @@ export default function Minion({newMinion}) {
     })
   };
 
-  const toggleEdit = ()=>{
+  const toggleEdit = (e)=>{
     //hanle saving editing
     if(editing){
       if(newMinion){
         dispatch(createMinionThunk(selectedMinion));
       }else{
+        console.log('updatin ....')
         dispatch(updateMinionThunk(selectedMinion));
       }
     }
-    setEditing(!editing);
+    setEditing((prev)=>(!prev));
   };
+
   return (
     <div id="single-minion-landing">
       <div className="minion-details">
