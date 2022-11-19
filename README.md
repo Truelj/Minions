@@ -23,9 +23,9 @@ The idea of 'minions' from a project that I had finished in my web development c
 
 3.    Last but not least, I used Express.js framework to build the server. A main goal for building this app was to create a basic CRUD API allowing for Create, Read, Update and Delete operations to the data resource. To realize that, I wrote Express routes to match different HTTP methods, and include ‘body-parser’ and ‘cors’ to solve problems arisen with communicating to the server. 
 
-4.    To check the project
+## To check the project
 
-Once you have downloaded the project, you’ll need to run some terminal commands to get the application started. Make sure you’ve installed Node. First, got the project directory in your terminal. Run ‘npm install’ to install the dependencies of this project. Once it has finished installing, you can run ‘npm start’ to build and run the front-end application. Open http://localhost:3000 to view it in your browser. After that, open a new terminal, go to the project directory, run ‘node server.js’ to begin your server. You’ll see ‘CORS-enabled Server listening on port 4001’ in the terminal. 
+Once you have downloaded the project, you’ll need to run some terminal commands to get the application started. Make sure you’ve installed Node. First, go to the project directory in your terminal. Run ‘npm install’ to install the dependencies of this project. Once it has finished installing, you can run ‘npm start’ to build and run the front-end application. Open http://localhost:3000 to view it in your browser. After that, open a new terminal, go to the project directory, run ‘node server.js’ to begin your server. You’ll see ‘CORS-enabled Server listening on port 4001’ in the terminal. 
 
 ## Implementation Details
 
