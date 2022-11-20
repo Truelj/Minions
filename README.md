@@ -49,3 +49,7 @@ Implementation of the server using Express.js should be found at ‘./src/server
 
 ### The ‘database’
 Stored in ‘./src/db.js’
+
+### The test suite
+I used mocha framework and supertest library to write tests for endpoints/APIs, and used chai library to write expressive assertions against server reponses. See './src/test/test.js' for more details. 
+
