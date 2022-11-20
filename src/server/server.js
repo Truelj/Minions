@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //mount the apiRouter at the '/api' path
-const apiRouter = require('./api');
+const apiRouter = require('./apiRouter.js');
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
@@ -19,11 +19,11 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-/*
+
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
-
+/*
 const { 
     addToDatabase,
     getAllFromDatabase,
