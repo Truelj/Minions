@@ -45,7 +45,7 @@ export default function Minion({newMinion}) {
         .then((minion)=>{ setSelectedMinion((prev)=>(minion))
         });
       }
-      return ()=>{setSelectedMinion(()=>({}))}
+      
   },[ ]);
   const handleChange = (e)=>{
     setSelectedMinion((prev)=>{

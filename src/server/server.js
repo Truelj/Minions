@@ -10,6 +10,16 @@ app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+//mount the apiRouter at the '/api' path
+const apiRouter = require('./api');
+app.use('/api', apiRouter);
+
+app.listen(PORT, () => {
+    console.log(`CORS-enabled Server listening on port ${PORT}`);
+});
+
+module.exports = app;
+/*
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
@@ -87,7 +97,5 @@ app.delete('/minions/:minionId', (req,res,next)=>{
     }
     res.send();
 });
+*/
 
-app.listen(PORT, () => {
-    console.log(`CORS-enabled Server listening on port ${PORT}`);
-});
